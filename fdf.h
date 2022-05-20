@@ -6,7 +6,7 @@
 /*   By: gyumpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:28:06 by gyumpark          #+#    #+#             */
-/*   Updated: 2022/05/20 11:28:07 by gyumpark         ###   ########.fr       */
+/*   Updated: 2022/05/20 14:01:17 by gyumpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "./minilibx_macos/mlx.h"
 
 # define WIN_WIDTH	(980)
-# define WIN_HEIGHT	(560)
+# define WIN_HEIGHT	(720)
 # define BUFFER_SIZE 1
 
 typedef struct s_mlx

@@ -6,7 +6,7 @@
 /*   By: gyumpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:28:16 by gyumpark          #+#    #+#             */
-/*   Updated: 2022/05/20 11:28:16 by gyumpark         ###   ########.fr       */
+/*   Updated: 2022/05/20 14:03:02 by gyumpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,7 @@ static void	zoom_color(t_fdf *fdf, float *x, float *y, int *z)
 	*y *= fdf->map.zoom;
 	fdf->map.x1 *= fdf->map.zoom;
 	fdf->map.y1 *= fdf->map.zoom;
-	if (fdf->map.m_click == 0)
-	{
-		if (*z == 0)
-			fdf->map.color = 0xffffff;
-		else if (*z > 0 && *z <= 5)
-			fdf->map.color = fdf->color.blue;
-		else if (*z > 5 && *z <= 10)
-			fdf->map.color = fdf->color.green;
-		else
-			fdf->map.color = fdf->color.red;
-	}
+	fdf->map.color = 0xffffff;
 }
 
 static void	isometric(t_fdf *fdf, float *x, float *y, int z)
@@ -52,7 +42,7 @@ static void	isometric(t_fdf *fdf, float *x, float *y, int z)
 	*y = (*x + *y) * (fdf->map.angle_y) - z;
 }
 
-static void	bresenham(t_fdf *fdf, float x, float y, int hint)
+static void	dda(t_fdf *fdf, float x, float y, int hint)
 {
 	float	x_step;
 	float	y_step;
@@ -91,9 +81,9 @@ int	draw(t_fdf *fdf)
 		while (x < fdf->map.width)
 		{
 			if (x < fdf->map.width - 1)
-				bresenham(fdf, x, y, 0);
+				dda(fdf, x, y, 0);
 			if (y < fdf->map.height - 1)
-				bresenham(fdf, x, y, 1);
+				dda(fdf, x, y, 1);
 			x++;
 		}
 		y++;
