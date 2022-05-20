@@ -6,7 +6,7 @@
 /*   By: gyumpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:28:54 by gyumpark          #+#    #+#             */
-/*   Updated: 2022/05/20 11:28:54 by gyumpark         ###   ########.fr       */
+/*   Updated: 2022/05/20 13:08:53 by gyumpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	main(int ac, char **av)
 	map_init(fdf);
 	fdf->mlx.init = mlx_init();
 	fdf->mlx.win = mlx_new_window(fdf->mlx.init, WIN_WIDTH, WIN_HEIGHT, "FDF");
-	mlx_hook(fdf->mlx.win, 3, 2, key_down, fdf);
+	mlx_hook(fdf->mlx.win, 2, 3, key_down, fdf);
 	mlx_loop_hook(fdf->mlx.init, draw, fdf);
 	mlx_loop(fdf->mlx.init);
 	free(fdf);
