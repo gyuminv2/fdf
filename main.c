@@ -6,7 +6,7 @@
 /*   By: gyumpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:28:54 by gyumpark          #+#    #+#             */
-/*   Updated: 2022/05/21 17:48:20 by gyumpark         ###   ########.fr       */
+/*   Updated: 2022/05/21 18:09:43 by gyumpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,15 @@
 static void	change_view(t_fdf *fdf)
 {
 	if (fdf->map.isometric++ % 2)
+	{
+		fdf->map.angle_x *= 2;
 		fdf->map.angle_y *= 0.5;
+	}
 	else
+	{
+		fdf->map.angle_x *= 0.5;
 		fdf->map.angle_y *= 2;
+	}
 }
 
 static int	key_down(int keycode, t_fdf *fdf)
