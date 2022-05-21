@@ -6,10 +6,9 @@
 /*   By: gyumpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:28:40 by gyumpark          #+#    #+#             */
-/*   Updated: 2022/05/20 11:28:41 by gyumpark         ###   ########.fr       */
+/*   Updated: 2022/05/21 17:37:32 by gyumpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "fdf.h"
 
 static void	saving_row_col(int *row, int *col, int *len)
@@ -31,7 +30,7 @@ static int	error_and_get(char *line)
 		if (ft_isdigit(*line))
 		{
 			rows ++;
-			while (ft_isdigit(*line))
+			while (ft_isdigit(*line) || *line == ',' || ft_isalpha(*line))
 				line ++;
 		}
 		else if (*line != ' ' && *line != '-' && *line != '\n')
@@ -50,6 +49,8 @@ static void	pasing_ready(char *av, t_fdf *fdf)
 	char	*line;
 
 	fd = open(av, O_RDONLY);
+	if (fd < 0)
+		ft_error("ERROR: no map_file\n", 20);
 	one_line = 0;
 	rows = 0;
 	cols = 0;

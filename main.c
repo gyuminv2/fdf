@@ -6,7 +6,7 @@
 /*   By: gyumpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:28:54 by gyumpark          #+#    #+#             */
-/*   Updated: 2022/05/20 13:55:43 by gyumpark         ###   ########.fr       */
+/*   Updated: 2022/05/21 17:48:20 by gyumpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static int	key_down(int keycode, t_fdf *fdf)
 	else if (keycode == 123)
 		fdf->map.shift_x -= 30;
 	else if (keycode == 34)
-		fdf->map.zoom += 3;
+		fdf->map.zoom += 1;
 	else if (keycode == 31)
-		fdf->map.zoom -= 3;
+		fdf->map.zoom -= 1;
 	else if (keycode == 46)
 	{
 		fdf->map.color = (rand() % 0xffffff);
@@ -51,9 +51,9 @@ static int	key_down(int keycode, t_fdf *fdf)
 static void	map_init(t_fdf *fdf)
 {
 	if (fdf->map.width > fdf->map.height)
-		fdf->map.zoom = ceil((WIN_WIDTH / fdf->map.width) - 20);
+		fdf->map.zoom = ceil((WIN_WIDTH / fdf->map.width) - 2);
 	else
-		fdf->map.zoom = ceil((WIN_HEIGHT / fdf->map.height) - 20);
+		fdf->map.zoom = ceil((WIN_HEIGHT / fdf->map.height) - 2);
 	fdf->map.isometric = 1;
 	fdf->map.angle_x = cos(M_PI / 3);
 	fdf->map.angle_y = sin(M_PI / 6);
@@ -81,8 +81,8 @@ int	main(int ac, char **av)
 	map_init(fdf);
 	fdf->mlx.init = mlx_init();
 	fdf->mlx.win = mlx_new_window(fdf->mlx.init, WIN_WIDTH, WIN_HEIGHT, "FDF");
+	draw(fdf);
 	mlx_hook(fdf->mlx.win, 2, 3, key_down, fdf);
-	mlx_loop_hook(fdf->mlx.init, draw, fdf);
 	mlx_loop(fdf->mlx.init);
 	free(fdf);
 	return (0);

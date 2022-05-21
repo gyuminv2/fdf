@@ -6,7 +6,7 @@
 /*   By: gyumpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:28:16 by gyumpark          #+#    #+#             */
-/*   Updated: 2022/05/20 14:03:02 by gyumpark         ###   ########.fr       */
+/*   Updated: 2022/05/21 17:35:06 by gyumpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static void	zoom_color(t_fdf *fdf, float *x, float *y, int *z)
 	*y *= fdf->map.zoom;
 	fdf->map.x1 *= fdf->map.zoom;
 	fdf->map.y1 *= fdf->map.zoom;
-	fdf->map.color = 0xffffff;
+	if (fdf->map.m_click == 0)
+		fdf->map.color = 0xffffff;
 }
 
 static void	isometric(t_fdf *fdf, float *x, float *y, int z)

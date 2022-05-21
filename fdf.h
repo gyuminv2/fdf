@@ -6,7 +6,7 @@
 /*   By: gyumpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:28:06 by gyumpark          #+#    #+#             */
-/*   Updated: 2022/05/20 14:01:17 by gyumpark         ###   ########.fr       */
+/*   Updated: 2022/05/21 17:46:08 by gyumpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "./libft/libft.h"
 # include "./minilibx_macos/mlx.h"
 
-# define WIN_WIDTH	(980)
+# define WIN_WIDTH	(1280)
 # define WIN_HEIGHT	(720)
 # define BUFFER_SIZE 1
 
