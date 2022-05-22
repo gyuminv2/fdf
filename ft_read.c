@@ -6,7 +6,7 @@
 /*   By: gyumpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:28:40 by gyumpark          #+#    #+#             */
-/*   Updated: 2022/05/21 17:37:32 by gyumpark         ###   ########.fr       */
+/*   Updated: 2022/05/22 20:07:11 by gyumpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fdf.h"
@@ -70,24 +70,25 @@ static void	pasing_ready(char *av, t_fdf *fdf)
 
 static void	save_elements(t_fdf *fdf, int x, int y, char *line)
 {
-	char	**split;
+	char	**value;
 	int		i;
 
-	split = ft_split(line, ' ');
-	if (split)
+	value = ft_split(line, ' ');
+	if (value)
 	{
 		i = 0;
-		while (split[i] && (x != fdf->map.width))
+		while (value[i] && (x != fdf->map.width))
 		{
-			fdf->map.elements[y][x] = ft_atoi(split[i++]);
+			fdf->map.elements[y][x] = ft_atoi(value[i++]);
 			x ++;
 		}
 		i = 0;
-		while (split[i])
+		while (value[i])
 			i++;
 		while (i >= 0)
-			free(split[i--]);
+			free(value[i--]);
 	}
+	free(value);
 	free(line);
 }
 

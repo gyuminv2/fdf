@@ -5,85 +5,98 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyumpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/20 11:40:10 by gyumpark          #+#    #+#             */
-/*   Updated: 2022/05/20 11:41:43 by gyumpark         ###   ########.fr       */
+/*   Created: 2022/05/22 20:12:41 by gyumpark          #+#    #+#             */
+/*   Updated: 2022/05/22 20:13:03 by gyumpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	word_count(char const *s, char c)
+static char	**str_free_all(char **str)
 {
-	int	i;
-	int	count;
+	size_t	i;
 
 	i = 0;
-	count = 0;
-	while (s[i])
+	while (str[i])
 	{
-		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
-			count++;
+		free(str[i]);
 		i++;
 	}
-	return (count);
+	free(str);
+	return (NULL);
 }
 
-int	word_length(char const *s, char c)
+static int	str_char_meet(char c, char ch)
+{
+	if (ch == c)
+		return (0);
+	if (c == '\0')
+		return (0);
+	return (1);
+}
+
+static int	same_sc(char *to, char const *from, char c, int *j)
 {
 	int	i;
-	int	len;
 
 	i = 0;
-	len = 0;
-	while (s[i] != c && s[i] != '\0')
+	while (str_char_meet(from[i], c) == 1)
 	{
+		to[i] = from[i];
 		i++;
-		len++;
 	}
-	return (len);
+	to[i] = '\0';
+	return (*j);
 }
 
-char	**fuct(char const *s, char c, char **result, int words_count)
+static int	count_meet(char const *str, char c, int *j)
 {
 	int	i;
-	int	j;
-	int	w_len;
+	int	met;
 
-	while (*s == c)
-		s++;
-	i = -1;
-	while (++i < words_count)
+	i = 0;
+	met = 0;
+	if (*j == 0)
 	{
-		while (*s == c)
-			s++;
-		j = 0;
-		w_len = word_length(s, c);
-		result[i] = (char *)malloc(sizeof(char) * (w_len + 1));
-		if (!(result[i]))
-			return (NULL);
-		while (j < w_len)
-		{
-			result[i][j] = *s;
-			s++;
-			j++;
-		}
-		result[i][j] = '\0';
+		while (str_char_meet(str[i], c) == 1)
+			i++;
+		*j = i;
+		return (*j);
 	}
-	return (result);
+	while (str[i])
+	{
+		if (str_char_meet(str[i], c) == 1 && str_char_meet(str[i + 1], c) == 0)
+			met++;
+		i++;
+	}
+	return (met);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**result;
-	int		wcount;
+	char	**save;
+	int		i;
+	int		space;
 
-	if (!s)
+	space = -1;
+	save = (char **)malloc(sizeof(char *) * (count_meet(s, c, &space) + 1));
+	if (!save)
 		return (NULL);
-	wcount = word_count(s, c);
-	result = (char **)malloc(sizeof(char *) * (wcount + 1));
-	if (!(result))
-		return (NULL);
-	result = fuct(s, c, result, wcount);
-	result[wcount] = NULL;
-	return (result);
+	save[count_meet(s, c, &space)] = 0;
+	while (*s)
+	{
+		if (str_char_meet(*s, c) == 0)
+			s++;
+		else
+		{
+			i = 0;
+			i = count_meet(s, c, &i);
+			save[space + 1] = (char *)malloc(sizeof(char) * (i + 1));
+			if (!save)
+				return (str_free_all(save));
+			s += same_sc(save[space + 1], s, c, &i);
+			space++;
+		}
+	}
+	return (save);
 }

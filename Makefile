@@ -6,7 +6,7 @@
 #    By: gyumpark <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 11:27:43 by gyumpark          #+#    #+#              #
-#    Updated: 2022/05/21 17:24:16 by gyumpark         ###   ########.fr        #
+#    Updated: 2022/05/22 20:08:36 by gyumpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,12 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAG) $(SRCS) minilibx_macos/libmlx.a -framework OpenGL -framework AppKit -o $(NAME)
 clean:
-	rm -rf $(OBJS)
+	$(RM) $(OBJS)
 
 fclean: clean
-	rm -rf $(NAME)
+	$(RM) $(NAME)
+	$(RM) *.dSYM
+	
 
 re: fclean all
 
